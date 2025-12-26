@@ -19,10 +19,10 @@
 - Cálculos matemáticos e operadores lógicos
 
 ## Regras de Negócio
-1 - Manter dados dos estudantes (nome, telefone, endereco, etc).
-2 - Registrar a aplicacao de exames (provas, simulados, etc)
-3 - Monitorar notas dos estudantes
-4 - Calcular metricas das turmas.
+1. Manter dados dos estudantes (nome, telefone, endereco, etc).
+2. Registrar a aplicacao de exames (provas, simulados, etc)
+3. Monitorar notas dos estudantes
+4. Calcular metricas das turmas.
 
 
 ## Autor
