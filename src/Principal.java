@@ -16,11 +16,16 @@ public class Principal {
         var opcao = 0;
         var somatorio = 0.0;
         var quantidadesNotas = 0;
+        var tirouZero = false;
 
         while (opcao != -1) {
 
             System.out.println("Digite a nota do estudante");
             var nota = leitor.nextDouble();
+
+            if (nota == 0) {
+                tirouZero = true;
+            }
 
             somatorio += nota;
             quantidadesNotas++;
@@ -31,10 +36,10 @@ public class Principal {
 
         var media = somatorio / quantidadesNotas;
 
-        System.out.println("Media do estudante: " + media);
+        System.out.println("Media do estudante " + nome + " : " + media);
 
         var aprovado = true;
-        if (media >= 7) {
+        if (media >= 7 && !tirouZero) {
             System.out.println("Estudante aprovado!");
         } else {
             System.out.println("Estudante reprovado");
