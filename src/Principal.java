@@ -1,7 +1,52 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
+
+        var e1 = new Estudante();
+        e1.nome = "Rodrigo";
+        var e2 = new Estudante();
+        e2.nome = "Ana";
+        var e3 = new Estudante();
+        e3.nome = "Maria";
+
+        var turma1 = new Turma();
+        turma1.codigo = "T01";
+        turma1.estudantes = new ArrayList<Estudante>();
+        turma1.estudantes.add(e1);
+        turma1.estudantes.add(e2);
+        turma1.estudantes.add(e3);
+
+        for (Estudante estudante : turma1.estudantes) {
+            System.out.println(estudante.nome);
+        }
+
+
+
+
+        /*
+        var lista = new ArrayList<Integer>();
+        lista.add(10);
+        lista.add(15);
+        lista.add(1200);
+        lista.add(999);
+        lista.add(0);
+        lista.add(4);
+        lista.add(10);
+
+        //lista.remove(1);
+
+        for (int numero : lista) {
+            System.out.println(numero);
+        }
+
+
+
+
+
+
+        /*
 
         System.out.println("Cadastro de Estudantes");
 
