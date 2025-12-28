@@ -2,8 +2,54 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
-        System.out.println("Boas vindas ao Sistema de Gestao Escolar!");
+        var estudante1 = new Estudante();
+        var estudante2 = new Estudante();
+        var turma1 = new Turma();
+        var turma2 = new Turma();
 
+        estudante1.nome = "Rodrigo";
+        estudante1.telefone = "123456";
+        estudante1.endereco = "Rua xpto";
+
+        estudante2.nome = "Maria";
+        estudante2.telefone = "999888";
+        estudante2.endereco = "Quadra 1 numero 3";
+
+        turma1.codigo = "T01";
+        turma1.finalizada = false;
+
+        turma2.codigo = "T02";
+        turma2.finalizada = true;
+
+        System.out.println(estudante2.nome);
+        System.out.println(estudante2.telefone);
+        System.out.println(estudante2.endereco);
+        System.out.println(turma1.codigo);
+        System.out.println(turma1.finalizada);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        System.out.println("Boas vindas ao Sistema de Gestao Escolar!");
 //        Scanner que vai ler do teclado
         var leitor = new Scanner(System.in);
 
@@ -59,6 +105,8 @@ public class Principal {
 //        } else {
 //            System.out.println("O estudante " + nome + " reprovou com nota: " + nota);
 //        }
+
+         */
 
 
 
