@@ -2,6 +2,58 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
+
+        System.out.println("Cadastro de Estudantes");
+
+        var leitor = new Scanner(System.in);
+
+        System.out.println("Digite o numero de estudantes para cadastrar");
+        var qtdEstudantes = Integer.parseInt(leitor.nextLine());
+        var estudantes = new Estudante[qtdEstudantes];
+
+        int qtdcadastrados = 0;
+        while (qtdcadastrados != qtdEstudantes) {
+            var estudante = new Estudante();
+
+            System.out.println("Digite o nome do estudante");
+            estudante.nome = leitor.nextLine();
+
+            System.out.println("Digite o telefone do estudante");
+            estudante.telefone = leitor.nextLine();
+
+            System.out.println("Digite o endereco do estudante");
+            estudante.endereco = leitor.nextLine();
+
+            System.out.println("Digite o responsavel do estudante");
+            estudante.responsavel = leitor.nextLine();
+
+            estudantes[qtdcadastrados] = estudante;
+
+            qtdcadastrados++;
+        }
+
+        for(Estudante e : estudantes) {
+            System.out.println("Nome: " + e.nome);
+            System.out.println("Telefone: " + e.telefone);
+            System.out.println("Endereco: " + e.endereco);
+            System.out.println("Responsavel: " + e.responsavel);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         var estudante1 = new Estudante();
         var estudante2 = new Estudante();
         var turma1 = new Turma();
