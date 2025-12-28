@@ -13,16 +13,23 @@ public class Principal {
         System.out.println("Digite a idade do estudante");
         var idade = leitor.nextInt();
 
-        System.out.println("Digite a nota 1 do estudante");
-        var nota1 = leitor.nextDouble();
+        var opcao = 0;
+        var somatorio = 0.0;
+        var quantidadesNotas = 0;
 
-        System.out.println("Digite a nota 2 do estudante");
-        var nota2 = leitor.nextDouble();
+        while (opcao != -1) {
 
-        System.out.println("Digite a nota 3 do estudante");
-        var nota3 = leitor.nextDouble();
+            System.out.println("Digite a nota do estudante");
+            var nota = leitor.nextDouble();
 
-        var media = (nota1 + nota2 + nota3) / 3;
+            somatorio += nota;
+            quantidadesNotas++;
+
+            System.out.println("Digite qualquer numero para informar outra nota? (0u -1 caso nao queira mais digitar notas)");
+            opcao = leitor.nextInt();
+        }
+
+        var media = somatorio / quantidadesNotas;
 
         System.out.println("Media do estudante: " + media);
 
