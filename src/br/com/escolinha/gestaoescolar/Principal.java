@@ -1,3 +1,10 @@
+package br.com.escolinha.gestaoescolar;
+
+import br.com.escolinha.gestaoescolar.dominio.Estudante;
+import br.com.escolinha.gestaoescolar.dominio.Turma;
+import br.com.escolinha.gestaoescolar.funcionalidades.CadastroDeEstudante;
+import br.com.escolinha.gestaoescolar.funcionalidades.CadastroDeTurma;
+
 import java.util.Scanner;
 
 public class Principal {
