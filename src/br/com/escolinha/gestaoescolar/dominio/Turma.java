@@ -1,3 +1,4 @@
+package br.com.escolinha.gestaoescolar.dominio;
 
 public class Turma {
 
