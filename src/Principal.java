@@ -1,33 +1,9 @@
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
 
-    public static void main(String[] args) throws IOException {
-        /*
-         * Exibir o menu principal
-         * Ler do teclado opcao do usuario
-         * Para cada opcao, implementar algoritmo especifico, ate que a opcao 5 seja escolhida
-         * Opcao 1: cadastrar turma
-         * Opcao 2: cadastrar estudante
-         * Opcao 3: listar turmas
-         * Opcao 4: lsitar estudantes
-         * Opcao 5: sair
-         */
+    public static void main(String[] args) {
 
-        var turmas = Path.of("turmas.csv");
-        if (!Files.exists(turmas)) {
-            Files.createFile(turmas);
-        }
-        var estudantes = Path.of("estudantes.csv");
-        if (!Files.exists(estudantes)) {
-            Files.createFile(estudantes);
-        }
         var leitor = new Scanner(System.in);
         var opcaoDigitada = 0;
 
@@ -35,13 +11,13 @@ public class Principal {
             exibirMenu();
             opcaoDigitada = Integer.parseInt(leitor.nextLine());
             if (opcaoDigitada == 1) {
-                cadastrarTurma(leitor, turmas);
-            } else if(opcaoDigitada == 2) {
-                cadastrarEstudante(leitor, estudantes);
-            } else if(opcaoDigitada == 3) {
-                listarTurmas(turmas);
-            } else if(opcaoDigitada == 4) {
-                listarEstudantes(estudantes);
+                cadastrarTurma(leitor);
+            } else if (opcaoDigitada == 2) {
+                cadastrarEstudante(leitor);
+            } else if (opcaoDigitada == 3) {
+                listarTurmas();
+            } else if (opcaoDigitada == 4) {
+                listarEstudantes();
             }
         }
     }
@@ -56,25 +32,23 @@ public class Principal {
         System.out.println("Digite o código da opção desejada:");
     }
 
-    private static void listarEstudantes(Path arquivo) {
-//        for(var estudante : estudantes) {
-//            System.out.println("Nome: " +estudante.getNome());
-//            System.out.println("Telefone: " +estudante.getTelefone());
-//            System.out.println("Endereco: " +estudante.getEndereco());
-//            System.out.println("Responsável: " +estudante.getResposavel());
-//        }
-    }
-
-    private static void listarTurmas(Path arquivo) throws IOException {
-        var linhas = Files.readAllLines(arquivo);
-
-        for(var linha : linhas) {
-            var campos = linha.split(",");
-            System.out.println(campos[0] + " - " + campos[1] + " - " + campos[2]);
+    private static void listarEstudantes() {
+        var cadastro = new CadastroDeEstudante();
+        var estudantesCadastrados = cadastro.listar();
+        for (var estudante : estudantesCadastrados) {
+            System.out.println(estudante.getNome() + " - " +estudante.getTelefone() + " - " +estudante.getEndereco() + " - " +estudante.getResposavel());
         }
     }
 
-    private static void cadastrarEstudante(Scanner leitor, Path arquivo) throws IOException {
+    private static void listarTurmas() {
+        var cadastro = new CadastroDeTurma();
+        var turmasCadastradas = cadastro.listar();
+        for (var turma : turmasCadastradas) {
+            System.out.println(turma.getCodigo() + " - " +turma.getNome() + " - " +turma.getCapacidade());
+        }
+    }
+
+    private static void cadastrarEstudante(Scanner leitor) {
         System.out.println("Digite o nome do estudante:");
         var nome = leitor.nextLine();
         System.out.println("Digite o telefone do estudante:");
@@ -85,13 +59,16 @@ public class Principal {
         var responsavel = leitor.nextLine();
 
         var estudante = new Estudante(nome, telefone, endereco, responsavel);
-        Files.writeString(
-                arquivo,
-                estudante.getNome() + "," + estudante.getTelefone() + "," + estudante.getEndereco() + "," + estudante.getResposavel() + "\n",
-                StandardOpenOption.APPEND);
+
+        var cadastro = new CadastroDeEstudante();
+        try {
+            cadastro.cadastrar(estudante);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao cadastrar estudante: " +e.getMessage());
+        }
     }
 
-    private static void cadastrarTurma(Scanner leitor, Path arquivo) throws IOException {
+    private static void cadastrarTurma(Scanner leitor) {
         System.out.println("Digite o código da turma:");
         var codigo = leitor.nextLine();
         System.out.println("Digite o nome da turma:");
@@ -100,10 +77,13 @@ public class Principal {
         var capacidade = Integer.parseInt(leitor.nextLine());
 
         var turma = new Turma(codigo, nome, capacidade);
-        Files.writeString(
-                arquivo,
-                turma.getCodigo() + "," + turma.getNome() + "," + turma.getCapacidade() + "\n",
-                StandardOpenOption.APPEND);
+
+        var cadastro = new CadastroDeTurma();
+        try {
+            cadastro.cadastrar(turma);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao cadastrar turma: " +e.getMessage());
+        }
     }
 
 }
