@@ -1,211 +1,109 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Principal {
-    public static void main(String[] args) {
 
-        var e1 = new Estudante();
-        e1.nome = "Rodrigo";
-        var e2 = new Estudante();
-        e2.nome = "Ana";
-        var e3 = new Estudante();
-        e3.nome = "Maria";
-
-        var turma1 = new Turma();
-        turma1.codigo = "T01";
-        turma1.estudantes = new ArrayList<Estudante>();
-        turma1.estudantes.add(e1);
-        turma1.estudantes.add(e2);
-        turma1.estudantes.add(e3);
-
-        for (Estudante estudante : turma1.estudantes) {
-            System.out.println(estudante.nome);
-        }
-
-
-
-
+    public static void main(String[] args) throws IOException {
         /*
-        var lista = new ArrayList<Integer>();
-        lista.add(10);
-        lista.add(15);
-        lista.add(1200);
-        lista.add(999);
-        lista.add(0);
-        lista.add(4);
-        lista.add(10);
-
-        //lista.remove(1);
-
-        for (int numero : lista) {
-            System.out.println(numero);
-        }
-
-
-
-
-
-
-        /*
-
-        System.out.println("Cadastro de Estudantes");
-
-        var leitor = new Scanner(System.in);
-
-        System.out.println("Digite o numero de estudantes para cadastrar");
-        var qtdEstudantes = Integer.parseInt(leitor.nextLine());
-        var estudantes = new Estudante[qtdEstudantes];
-
-        int qtdcadastrados = 0;
-        while (qtdcadastrados != qtdEstudantes) {
-            var estudante = new Estudante();
-
-            System.out.println("Digite o nome do estudante");
-            estudante.nome = leitor.nextLine();
-
-            System.out.println("Digite o telefone do estudante");
-            estudante.telefone = leitor.nextLine();
-
-            System.out.println("Digite o endereco do estudante");
-            estudante.endereco = leitor.nextLine();
-
-            System.out.println("Digite o responsavel do estudante");
-            estudante.responsavel = leitor.nextLine();
-
-            estudantes[qtdcadastrados] = estudante;
-
-            qtdcadastrados++;
-        }
-
-        for(Estudante e : estudantes) {
-            System.out.println("Nome: " + e.nome);
-            System.out.println("Telefone: " + e.telefone);
-            System.out.println("Endereco: " + e.endereco);
-            System.out.println("Responsavel: " + e.responsavel);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        var estudante1 = new Estudante();
-        var estudante2 = new Estudante();
-        var turma1 = new Turma();
-        var turma2 = new Turma();
-
-        estudante1.nome = "Rodrigo";
-        estudante1.telefone = "123456";
-        estudante1.endereco = "Rua xpto";
-
-        estudante2.nome = "Maria";
-        estudante2.telefone = "999888";
-        estudante2.endereco = "Quadra 1 numero 3";
-
-        turma1.codigo = "T01";
-        turma1.finalizada = false;
-
-        turma2.codigo = "T02";
-        turma2.finalizada = true;
-
-        System.out.println(estudante2.nome);
-        System.out.println(estudante2.telefone);
-        System.out.println(estudante2.endereco);
-        System.out.println(turma1.codigo);
-        System.out.println(turma1.finalizada);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        System.out.println("Boas vindas ao Sistema de Gestao Escolar!");
-//        Scanner que vai ler do teclado
-        var leitor = new Scanner(System.in);
-
-        System.out.println("Digite o nome do estudante: ");
-        var nome = leitor.nextLine();
-
-        System.out.println("Digite a idade do estudante");
-        var idade = leitor.nextInt();
-
-        var opcao = 0;
-        var somatorio = 0.0;
-        var quantidadesNotas = 0;
-        var tirouZero = false;
-
-        while (opcao != -1) {
-
-            System.out.println("Digite a nota do estudante");
-            var nota = leitor.nextDouble();
-
-            if (nota == 0) {
-                tirouZero = true;
-            }
-
-            somatorio += nota;
-            quantidadesNotas++;
-
-            System.out.println("Digite qualquer numero para informar outra nota? (0u -1 caso nao queira mais digitar notas)");
-            opcao = leitor.nextInt();
-        }
-
-        var media = somatorio / quantidadesNotas;
-
-        System.out.println("Media do estudante " + nome + " : " + media);
-
-        var aprovado = true;
-        if (media >= 7 && !tirouZero) {
-            System.out.println("Estudante aprovado!");
-        } else {
-            System.out.println("Estudante reprovado");
-            aprovado = false;
-        }
-
-        System.out.println(aprovado);
-
-//        var passou = nota >= 7.0;
-//
-//        if (nota == 10) {
-//            System.out.println("Parabens! Prova gabaritada");
-//        }
-//
-//        if (passou) {
-//            System.out.println("O estudante " + nome + " passou com nota: " + nota);
-//        } else {
-//            System.out.println("O estudante " + nome + " reprovou com nota: " + nota);
-//        }
-
+         * Exibir o menu principal
+         * Ler do teclado opcao do usuario
+         * Para cada opcao, implementar algoritmo especifico, ate que a opcao 5 seja escolhida
+         * Opcao 1: cadastrar turma
+         * Opcao 2: cadastrar estudante
+         * Opcao 3: listar turmas
+         * Opcao 4: lsitar estudantes
+         * Opcao 5: sair
          */
 
+        var turmas = Path.of("turmas.csv");
+        if (!Files.exists(turmas)) {
+            Files.createFile(turmas);
+        }
+        var estudantes = Path.of("estudantes.csv");
+        if (!Files.exists(estudantes)) {
+            Files.createFile(estudantes);
+        }
+        var leitor = new Scanner(System.in);
+        var opcaoDigitada = 0;
 
-
+        while (opcaoDigitada != 5) {
+            exibirMenu();
+            opcaoDigitada = Integer.parseInt(leitor.nextLine());
+            if (opcaoDigitada == 1) {
+                cadastrarTurma(leitor, turmas);
+            } else if(opcaoDigitada == 2) {
+                cadastrarEstudante(leitor, estudantes);
+            } else if(opcaoDigitada == 3) {
+                listarTurmas(turmas);
+            } else if(opcaoDigitada == 4) {
+                listarEstudantes(estudantes);
+            }
+        }
     }
+
+    private static void exibirMenu() {
+        System.out.println("Menu principal:");
+        System.out.println("1 - Cadastrar turma");
+        System.out.println("2 - Cadastrar estudante");
+        System.out.println("3 - Listar turmas");
+        System.out.println("4 - Listar estudantes");
+        System.out.println("5 - Sair");
+        System.out.println("Digite o código da opção desejada:");
+    }
+
+    private static void listarEstudantes(Path arquivo) {
+//        for(var estudante : estudantes) {
+//            System.out.println("Nome: " +estudante.getNome());
+//            System.out.println("Telefone: " +estudante.getTelefone());
+//            System.out.println("Endereco: " +estudante.getEndereco());
+//            System.out.println("Responsável: " +estudante.getResposavel());
+//        }
+    }
+
+    private static void listarTurmas(Path arquivo) throws IOException {
+        var linhas = Files.readAllLines(arquivo);
+
+        for(var linha : linhas) {
+            var campos = linha.split(",");
+            System.out.println(campos[0] + " - " + campos[1] + " - " + campos[2]);
+        }
+    }
+
+    private static void cadastrarEstudante(Scanner leitor, Path arquivo) throws IOException {
+        System.out.println("Digite o nome do estudante:");
+        var nome = leitor.nextLine();
+        System.out.println("Digite o telefone do estudante:");
+        var telefone = leitor.nextLine();
+        System.out.println("Digite o endereco do estudante:");
+        var endereco = leitor.nextLine();
+        System.out.println("Digite o nome do resposável pelo estudante:");
+        var responsavel = leitor.nextLine();
+
+        var estudante = new Estudante(nome, telefone, endereco, responsavel);
+        Files.writeString(
+                arquivo,
+                estudante.getNome() + "," + estudante.getTelefone() + "," + estudante.getEndereco() + "," + estudante.getResposavel() + "\n",
+                StandardOpenOption.APPEND);
+    }
+
+    private static void cadastrarTurma(Scanner leitor, Path arquivo) throws IOException {
+        System.out.println("Digite o código da turma:");
+        var codigo = leitor.nextLine();
+        System.out.println("Digite o nome da turma:");
+        var nome = leitor.nextLine();
+        System.out.println("Digite a capacidade da turma:");
+        var capacidade = Integer.parseInt(leitor.nextLine());
+
+        var turma = new Turma(codigo, nome, capacidade);
+        Files.writeString(
+                arquivo,
+                turma.getCodigo() + "," + turma.getNome() + "," + turma.getCapacidade() + "\n",
+                StandardOpenOption.APPEND);
+    }
+
 }
