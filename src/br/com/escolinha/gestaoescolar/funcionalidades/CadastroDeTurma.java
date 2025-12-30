@@ -1,3 +1,7 @@
+package br.com.escolinha.gestaoescolar.funcionalidades;
+
+import br.com.escolinha.gestaoescolar.dominio.Turma;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
